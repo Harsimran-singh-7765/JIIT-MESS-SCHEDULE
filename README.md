@@ -1,3 +1,2 @@
-# sb1-krfv8zit
+# JIIt-62 MESS TIMETABLE
 
-[Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/J-harry-62/sb1-krfv8zit)
