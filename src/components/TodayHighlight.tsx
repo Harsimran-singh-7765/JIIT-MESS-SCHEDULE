@@ -1,38 +1,31 @@
 import React from 'react';
-import { timetableData } from '../data/timetable';
-import { getCurrentDay } from '../utils/dateUtils';
-import { getCurrentMealTime, getNextMealTime } from '../utils/mealTimeUtils';
-import { findGoodDish } from '../utils/menuUtils';
+import { Clock } from 'lucide-react';
+import { useCurrentMeal } from '../hooks/useCurrentMeal';
 
 export function TodayHighlight() {
-  const currentDay = getCurrentDay();
-  const todayMeals = timetableData[currentDay];
-  const currentMealTime = getCurrentMealTime();
-  const nextMealTime = currentMealTime || getNextMealTime();
-  const goodDish = findGoodDish(todayMeals, nextMealTime);
+  const { todayMeals, nextMealTime, nextMeal } = useCurrentMeal();
 
   return (
-    <div className="max-w-md mx-auto mb-12 text-center">
-      <div
-        className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20
-              hover:rotate-5 hover:-translate-y-2 hover:shadow-[0px_0px_20px_5px_rgba(0,200,255,0.8)] 
-        hover:border-blue-400
-        before:absolute before:inset-0 before:bg-gradient-to-r 
-        before:from-blue-500 before:via-purple-500 before:to-pink-500 
-        before:blur-[50px] before:opacity-0 hover:before:opacity-100 
-        before:transition-all before:duration-300 before:z-[-1]
-      "
-      >
-        <p className="text-blue-400 mb-2">Next Meal</p>
-        <p className="text-xl font-semibold">
-          {goodDish}{' '}
-          <span className="text-sm text-slate-400">({nextMealTime})</span>
-        </p>
-        <p className="text-sm text-slate-400 mt-2">
-          Served during{' '}
-          <span className="text-blue-300">{nextMealTime.toLowerCase()}</span>{' '}
-          time!
-        </p>
+    <div className="max-w-2xl mx-auto mb-12">
+      <div className="bg-blue-500/10 rounded-lg p-6 border border-blue-500/20">
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <Clock className="w-6 h-6 text-blue-400" />
+          <h2 className="text-2xl font-bold text-blue-400">Next Meal</h2>
+        </div>
+        
+        <div className="space-y-4">
+          <div className="text-center">
+            <p className="text-lg text-slate-400">
+              {nextMealTime} at {nextMeal === 'breakfast' ? '8:00 AM' : nextMeal === 'lunch' ? '12:30 PM' : '7:30 PM'}
+            </p>
+          </div>
+
+          <div className="bg-slate-800/50 rounded-lg p-4">
+            <p className="text-lg text-white whitespace-pre-line">
+              {todayMeals[nextMeal]}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
