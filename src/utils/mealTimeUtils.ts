@@ -1,8 +1,8 @@
 // Define meal time ranges
 const MEAL_TIMES = {
-  Breakfast: [6, 10], // 6:00 AM to 10:00 AM
-  Lunch: [10, 15], // 10:00 AM to 3:00 PM
-  Dinner: [15, 21], // 3:00 PM to 9:00 PM
+  Breakfast: [21, 9], // 6:00 AM to 10:00 AM
+  Lunch: [9, 14], // 10:00 AM to 3:00 PM
+  Dinner: [14, 22], // 3:00 PM to 9:00 PM
 } as const;
 
 export function getCurrentMealTime(): string | null {
