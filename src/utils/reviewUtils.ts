@@ -6,28 +6,32 @@ export function getFormattedDate(date: Date = new Date()): string {
   return date.toISOString().split('T')[0];
 }
 
-export function loadReviews(): Reviews {
+// Use local storage instead of Firebase
+function loadFromLocalStorage(): Reviews {
   try {
-    const savedReviews = localStorage.getItem(REVIEWS_STORAGE_KEY);
-    return savedReviews ? JSON.parse(savedReviews) : {};
-  } catch (error) {
-    console.error('Error loading reviews:', error);
+    const stored = localStorage.getItem(REVIEWS_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : {};
+  } catch {
     return {};
   }
 }
 
-export function saveReviews(reviews: Reviews): void {
-  try {
-    localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviews));
-  } catch (error) {
-    console.error('Error saving reviews:', error);
-  }
+function saveToLocalStorage(reviews: Reviews): void {
+  localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviews));
 }
 
-export function addReview(
+export async function loadReviews(): Promise<Reviews> {
+  return loadFromLocalStorage();
+}
+
+export async function saveReviews(reviews: Reviews): Promise<void> {
+  saveToLocalStorage(reviews);
+}
+
+export async function addReview(
   reviews: Reviews,
   newReview: Omit<Review, 'id' | 'date'>
-): Reviews {
+): Promise<Reviews> {
   const date = getFormattedDate();
   const id = crypto.randomUUID();
   const updatedReviews = {
@@ -38,8 +42,7 @@ export function addReview(
     ]
   };
   
-  // Save to localStorage
-  saveReviews(updatedReviews);
+  saveToLocalStorage(updatedReviews);
   return updatedReviews;
 }
 

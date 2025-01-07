@@ -12,7 +12,7 @@ export function findGoodDish(meals: MealTime, mealTime: string): string {
 }
 
 export function getSpecialItems(meals: MealTime): string[] {
-  const specialKeywords = ['Paneer', 'Egg', 'Chicken', 'Fish', 'Special', 'Biryani'];
+  const specialKeywords = ['Paneer', 'Egg', 'Chicken', 'Fish', 'Special', 'Biryani','Halwa'];
   const allMeals = [meals.breakfast, meals.lunch, meals.dinner].join(' ');
   
   return specialKeywords.filter(keyword => 
