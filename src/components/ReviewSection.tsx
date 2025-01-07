@@ -5,18 +5,37 @@ import { Reviews } from '../types/review';
 import { addReview, getTodayReviews, loadReviews } from '../utils/reviewUtils';
 
 export function ReviewSection() {
-  const [reviews, setReviews] = useState<Reviews>(() => loadReviews());
+  const [reviews, setReviews] = useState<Reviews>({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleSubmitReview = (reviewData: {
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const loadedReviews = await loadReviews();
+      setReviews(loadedReviews);
+      setIsLoading(false);
+    };
+    fetchReviews();
+  }, []);
+
+  const handleSubmitReview = async (reviewData: {
     mealType: string;
     rating: number;
     comment: string;
     author: string;
   }) => {
-    setReviews(prev => addReview(prev, reviewData));
+    const updatedReviews = await addReview(reviews, reviewData);
+    setReviews(updatedReviews);
   };
 
   const todayReviews = getTodayReviews(reviews);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-12 space-y-8">
