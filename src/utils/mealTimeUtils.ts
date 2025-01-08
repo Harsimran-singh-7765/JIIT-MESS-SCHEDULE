@@ -1,23 +1,31 @@
-// Define meal time ranges
+// Define meal time ranges (24-hour format)
 const MEAL_TIMES = {
-  Breakfast: [21, 9], // 9:00 PM to 9:00 AM
-  Lunch: [9, 14], // 10:00 AM to 2:00 PM
-  Dinner: [15, 21], // 3:00 PM to 9:00 PM
+  Breakfast: [0, 9],    // 0:00 AM to 9:00 AM
+  Lunch: [9, 14],       // 9:00 AM to 2:00 PM
+  Dinner: [14, 24],      // 2:00 PM to 24:00 PM
 } as const;
 
 export function getCurrentMealTime(): string | null {
   const currentHour = new Date().getHours();
+  
   for (const [meal, [start, end]] of Object.entries(MEAL_TIMES)) {
-    if (currentHour >= start && currentHour < end) return meal;
+    if (currentHour >= start && currentHour < end) {
+      return meal;
+    }
   }
-  return null; // Return null if current time is outside meal ranges
+  return null;
 }
 
 export function getNextMealTime(): string {
   const currentHour = new Date().getHours();
-  const meals = Object.entries(MEAL_TIMES).filter(
-    ([, [start]]) => currentHour < start
-  );
-
-  return meals.length > 0 ? meals[0][0] : 'Breakfast'; // Return Breakfast for next day
+  
+  // Find the next meal time
+  for (const [meal, [start]] of Object.entries(MEAL_TIMES)) {
+    if (currentHour < start) {
+      return meal;
+    }
+  }
+  
+  // If after dinner time, return breakfast for next day
+  return 'Breakfast';
 }

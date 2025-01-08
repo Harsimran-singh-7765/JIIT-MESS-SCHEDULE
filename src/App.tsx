@@ -5,13 +5,13 @@ const Header = lazy(() => import('./components/Header').then(module => ({ defaul
 const SpecialMenu = lazy(() => import('./components/SpecialMenu').then(module => ({ default: module.SpecialMenu })));
 const TodayHighlight = lazy(() => import('./components/TodayHighlight').then(module => ({ default: module.TodayHighlight })));
 const TimetableGrid = lazy(() => import('./components/TimetableGrid').then(module => ({ default: module.TimetableGrid })));
+const Mess128Schedule = lazy(() => import('./components/Mess128Schedule').then(module => ({ default: module.Mess128Schedule })));
 const Credits = lazy(() => import('./components/Credits').then(module => ({ default: module.Credits })));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Ensure loading screen shows for at least 2 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -31,7 +31,13 @@ export default function App() {
             <Header />
             <SpecialMenu />
             <TodayHighlight />
-            <TimetableGrid />
+            <div id="jiit-62" className="scroll-mt-8">
+              <h2 className="text-2xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                JIIT-62 Mess Schedule
+              </h2>
+              <TimetableGrid />
+            </div>
+            <Mess128Schedule />
             <Credits />
           </Suspense>
         </div>
