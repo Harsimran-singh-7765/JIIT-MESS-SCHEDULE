@@ -8,7 +8,17 @@ export function SpecialMenu() {
   const currentDay = getCurrentDay();
   const todayMeals = timetableData[currentDay];
   
-  const specialItems = getSpecialItems(todayMeals);
+  const findMealType = (item: string) => {
+    if (todayMeals.breakfast.includes(item)) return 'Breakfast';
+    if (todayMeals.lunch.includes(item)) return 'Lunch';
+    if (todayMeals.dinner.includes(item)) return 'Dinner';
+    return '';
+  };
+
+  const specialItems = getSpecialItems(todayMeals).map(item => ({
+    item,
+    mealType: findMealType(item)
+  }));
 
   if (specialItems.length === 0) return null;
 
@@ -22,7 +32,8 @@ export function SpecialMenu() {
         <div className="space-y-1">
           {specialItems.map((special, index) => (
             <p key={index} className="text-lg font-medium text-white">
-              {special}
+              {special.item}{' '}
+              <span className="text-sm text-yellow-400">({special.mealType})</span>
             </p>
           ))}
         </div>
