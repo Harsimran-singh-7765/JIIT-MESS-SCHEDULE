@@ -33,7 +33,7 @@ export default function App() {
             <TodayHighlight />
             <div id="jiit-62" className="scroll-mt-8">
               <h2 className="text-2xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                JIIT-62 Mess Schedule
+                JIIT Mess Schedule
               </h2>
               <TimetableGrid />
             </div>
