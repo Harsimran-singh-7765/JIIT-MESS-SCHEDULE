@@ -36,4 +36,4 @@ export const timetableData: WeeklyTimetable = {
     lunch: 'Beans Aloo, Masoor Sabut Dal, Raita, Rice, Roti, Achar, Salad, Shahi Tukda',
     dinner: 'Sambar Vada, Chutney, Aloo Tamatar, Lemon Rice, Roti, Achar, Milk'
   }
-};
+}
