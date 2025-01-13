@@ -1,8 +1,8 @@
 export const timetable128Data = {
-  Monday: 'Arhar Dal, Matar Paneer, Rice, Chapati, Achar, Salad, Suji Halwa,',
-  Tuesday: 'Rajma Dal, Mix Veg, Lemon Rice, Chapati, Achar, Salad, Coconut Burfi,',
-  Wednesday: 'Kadhi Pakoda, Aloo Jeera, Matar Rice, Chapati, Achar, Salad, Jalebi,',
-  Thursday: 'Chhole, Gobhi Aloo, Rice, Bhature, Achar, Salad, Bundi Raita,',
-  Friday: 'Dal Makhani, Patta Gobhi Matar Aloo, Rice, Chapati, Achar, Salad, Sabudana Kheer,',
-  Saturday: 'Kala Chana Aloo, Sita Fal, Rice, Bedmi Puri, Achar, Salad, Laddu,'
+  Monday: 'Arhar Dal, Sahi Paneer, Rice, Chapati, Achar, Salad, Rice Kheer,',
+  Tuesday: 'Makar Sankranti,',
+  Wednesday: 'Rajma Dal, Gobhi Kofta, Rice, Chapati, Achar, Salad, Sabudana Kheer,',
+  Thursday: 'Chhole, Patta Gobhi Matar, Rice, Bhature, Achar, Salad, Bundi Raita,',
+  Friday: 'Dal Makhani, Gobhi Masala, Rice, Chapati, Achar, Salad, Semiya Kheer,',
+  Saturday: 'Panch Ratan Dal, Chhole, Rice, Tandoori Roti, Achar, Salad, Besan Burfi,'
 };
