@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { LoadingScreen } from './components/LoadingScreen';
+import { saveDataToCache, loadDataFromCache, isOnline } from './utils/offlineStorage';
 
 const Header = lazy(() => import('./components/Header').then(module => ({ default: module.Header })));
 const SpecialMenu = lazy(() => import('./components/SpecialMenu').then(module => ({ default: module.SpecialMenu })));
@@ -10,13 +11,30 @@ const Credits = lazy(() => import('./components/Credits').then(module => ({ defa
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isOffline, setIsOffline] = useState(!isOnline());
 
   useEffect(() => {
+    // Save data to cache when online
+    if (isOnline()) {
+      saveDataToCache();
+    }
+
+    // Handle online/offline status
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+      clearTimeout(timer);
+    };
   }, []);
 
   if (isLoading) {
@@ -25,6 +43,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      {isOffline && (
+        <div className="bg-yellow-600/20 text-yellow-200 px-4 py-2 text-center">
+          You are currently offline. Showing cached schedule.
+        </div>
+      )}
       <div className="bg-gradient-to-b from-blue-900/20 to-transparent">
         <div className="container mx-auto px-4 py-16">
           <Suspense fallback={<LoadingScreen />}>
