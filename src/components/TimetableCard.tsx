@@ -1,14 +1,15 @@
 import React from 'react';
 import { MealTime } from '../types/timetable';
-import { Coffee, Sun, Moon } from 'lucide-react';
+import { Coffee, Sun, Moon, Calendar } from 'lucide-react';
 
 interface TimetableCardProps {
   day: string;
   meals: MealTime;
   isToday: boolean;
+  date: string;
 }
 
-export function TimetableCard({ day, meals, isToday }: TimetableCardProps) {
+export function TimetableCard({ day, meals, isToday, date }: TimetableCardProps) {
   return (
     <div
       className={`
@@ -26,15 +27,21 @@ export function TimetableCard({ day, meals, isToday }: TimetableCardProps) {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       
       <div className="relative z-10">
-        <h3
-          className={`
-            text-2xl font-bold mb-4
-            ${isToday ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500' : 'text-white'}
-          `}
-        >
-          {day}
-          {isToday && <span className="ml-2 text-sm text-blue-400">(Today)</span>}
-        </h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3
+            className={`
+              text-2xl font-bold
+              ${isToday ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500' : 'text-white'}
+            `}
+          >
+            {day}
+            {isToday && <span className="ml-2 text-sm text-blue-400">(Today)</span>}
+          </h3>
+          <div className="flex items-center text-slate-400">
+            <Calendar className="w-4 h-4 mr-1" />
+            <span className="text-sm">{date}</span>
+          </div>
+        </div>
 
         <div className="space-y-4">
           <div className="flex items-center space-x-3">

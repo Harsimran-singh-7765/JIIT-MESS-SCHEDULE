@@ -33,7 +33,7 @@ export function Mess128Schedule() {
             </h3>
             
             <div className="space-y-2">
-              <p className="text-sm text-purple-400">Lunch (12:00 PM - 2:00 PM)</p>
+              <p className="text-sm text-purple-400">Lunch (9:00 AM - 2:00 PM)</p>
               <p className="text-white">{menu}</p>
             </div>
           </div>
