@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['vite.svg'],
+      includeAssets: ['logo.jpg'],
       manifest: {
         name: 'JIIT Mess Schedule',
         short_name: 'JIIT Mess',
@@ -17,15 +17,21 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'vite.svg',
+            src: 'logo.jpg',
             sizes: '192x192',
-            type: 'image/svg+xml',
+            type: 'image/jpeg',
+            purpose: 'any maskable'
+          },
+          {
+            src: 'logo.jpg',
+            sizes: '512x512',
+            type: 'image/jpeg',
             purpose: 'any maskable'
           }
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg}'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -44,8 +50,5 @@ export default defineConfig({
         ]
       }
     })
-  ],
-  optimizeDeps: {
-    exclude: ['lucide-react']
-  }
+  ]
 });
