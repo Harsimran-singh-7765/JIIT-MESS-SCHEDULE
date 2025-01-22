@@ -1,4 +1,4 @@
-// Service Worker for offline functionality
+// Service Worker for offline functionality and push notifications
 const CACHE_NAME = 'mess-schedule-v1';
 const urlsToCache = [
   '/',
@@ -6,7 +6,7 @@ const urlsToCache = [
   '/src/main.tsx',
   '/src/App.tsx',
   '/src/index.css',
-  // Add other static assets and routes that need to be cached
+  '/logo.jpg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -20,18 +20,14 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Return cached response if found
         if (response) {
           return response;
         }
-        // Otherwise fetch from network
         return fetch(event.request)
           .then((response) => {
-            // Check if we received a valid response
             if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
             }
-            // Clone the response as it can only be consumed once
             const responseToCache = response.clone();
             caches.open(CACHE_NAME)
               .then((cache) => {
@@ -40,5 +36,30 @@ self.addEventListener('fetch', (event) => {
             return response;
           });
       })
+  );
+});
+
+self.addEventListener('push', (event) => {
+  const options = {
+    body: event.data.text(),
+    icon: '/logo.jpg',
+    badge: '/logo.jpg',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    }
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('JIIT Mess Schedule', options)
+  );
+});
+
+// Handle notification clicks
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow('/')
   );
 });
