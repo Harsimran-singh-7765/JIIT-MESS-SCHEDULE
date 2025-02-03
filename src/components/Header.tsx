@@ -52,8 +52,8 @@ export function Header() {
       {/* Floating Suggestion Box */}
       {showSuggestion && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
-            <span>Refresh Please</span>
+          <div className="bg-purple-300 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
+            <span>Refresh Please (specially  on Mondays)</span>
             <button onClick={() => setShowSuggestion(false)} className="text-white">
               <X className="w-4 h-4" />
             </button>
