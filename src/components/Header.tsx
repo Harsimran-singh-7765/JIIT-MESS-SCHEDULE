@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Clock, ChevronDown } from 'lucide-react';
+import { Clock, ChevronDown, X } from 'lucide-react';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showSuggestion, setShowSuggestion] = useState(true);
 
   const scrollToMess = (id: string) => {
     const element = document.getElementById(id);
@@ -47,6 +48,16 @@ export function Header() {
           </div>
         )}
       </div>
+
+      {/* Floating Suggestion Box */}
+      {showSuggestion && (
+        <div className="fixed bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
+          <span>Refresh Please</span>
+          <button onClick={() => setShowSuggestion(false)} className="text-white">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
