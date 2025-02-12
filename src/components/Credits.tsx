@@ -15,6 +15,7 @@ export function Credits() {
         
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
          The menu may not always be updated due to unavoidable circumstances.
+        </span>
 
 
       </p>
