@@ -14,8 +14,9 @@ export function Credits() {
       <p className="flex items-center justify-center gap-1">
         
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-         Disclaimer: The menue can be changed or not updated under unavoidable circumstances.
-        </span>
+         Disclaimer: The menu is subject to change and may not always be updated due to unavoidable circumstances.
+
+
       </p>
     </div>
   );
