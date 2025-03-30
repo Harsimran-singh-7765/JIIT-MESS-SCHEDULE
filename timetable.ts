@@ -5,5 +5,4 @@ export interface WeeklyTimetable {
     dinner?: string;
   };
 }
-
 export const timetableData: WeeklyTimetable = {};
